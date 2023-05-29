@@ -9,14 +9,14 @@ CREATE TABLE categorias(
 
 CREATE TABLE clientes(
   clienteId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  celular INT NOT NULL,
+  celular VARCHAR(50) NOT NULL,
   compañia VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE empleados(
   empleadoId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(50) NOT NULL,
-  celular INT NOT NULL,
+  celular VARCHAR(50) NOT NULL,
   direccion VARCHAR(50) NOT NULL,
   imagen MEDIUMBLOB NOT NULL  
 );
@@ -33,7 +33,7 @@ CREATE TABLE facturas(
 CREATE TABLE proveedores(
     proveedorId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(50) NOT NULL,
-    telefono INT NOT NULL,
+    telefono VARCHAR(50) NOT NULL,
     ciudad VARCHAR(50) NOT NULL
 );
 CREATE TABLE productos(

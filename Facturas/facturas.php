@@ -6,7 +6,7 @@
     
     error_reporting(E_ALL);
 
-    require_once('config.php');
+    require_once('configFacturas.php');
     $data= new Factura();
     $all= $data ->selectAll();
 ?>
@@ -78,7 +78,7 @@
 
     <div class="parte-media">
       <div style="display: flex; justify-content: space-between;">
-        <h2>Categorias</h2>
+        <h2>Facturas</h2>
         <button class="btn-m" data-bs-toggle="modal" data-bs-target="#registrarEstudiantes"><i class="bi bi-person-add " style="color: rgb(255, 255, 255);" ></i></button>
       </div>
       <div class="menuTabla contenedor2">
@@ -97,7 +97,6 @@
             <?php
               foreach($all as $Key=> $val ){
 
-              
             ?>
             <tr>
               <td><?php echo $val['facturaId']?> </td>
@@ -143,9 +142,9 @@
               <div class="mb-1 col-12">
                 <label for="nombres" class="form-label">Empleado</label>
                 <input 
-                  type="text"
-                  id="nombre"
-                  name="nombre"
+                  type="number"
+                  id="empleadoId"
+                  name="empleadoId"
                   class="form-control"  
                 />
               </div>
@@ -153,24 +152,22 @@
               <div class="mb-1 col-12">
                 <label for="direccion" class="form-label">Cliente</label>
                 <input 
-                  type="text"
-                  id="descripcion"
-                  name="descripcion"
+                  type="number"
+                  id="clienteId"
+                  name="clienteId"
                   class="form-control"  
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="logros" class="form-label">Fecha</label>
+                <label for="direccion" class="form-label">Fecha</label>
                 <input 
-                  type="Date"
+                  type="date"
                   id="fecha"
                   name="fecha"
                   class="form-control"  
-                 
                 />
               </div>
-
               
               <div class=" col-12 m-2">
                 <input type="submit" class="btn btn-primary" value="Guardar" name="guardar"/>

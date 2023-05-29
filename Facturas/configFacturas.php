@@ -7,64 +7,63 @@
 
 
 
-    require_once("../db.php");
+    require_once("../Config/config.php");
 
-    class Factura{
+    class Factura extends Conexion{
         private $facturaId;
         private $empleadoId;
-        private $descripcion;
-        private $imagen;
-        protected $dbCnx;
+        private $clienteId;
+        private $fecha;
 
 
 
-        public function __construct($categoriaId=0,$nombre="",$descripcion="",$imagen=""){
-            $this->categoriaId=$categoriaId;
-            $this->nombre=$nombre;
-            $this->descripcion=$descripcion;
-            $this->imagen=$imagen;
-            $this->dbCnx = new PDO(DB_TYPE.":host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PWD, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC] );
+        public function __construct($facturaId=0,$empleadoId=0,$clienteId=0,$fecha="",$dbCnx=""){
+            parent :: __construct($dbCnx);
+            $this->facturaId=$facturaId;
+            $this->empleadoId=$empleadoId;
+            $this->clienteId=$clienteId;
+            $this->fecha=$fecha;
         }
 
 
 
-        public function setCategoriaId($categoriaId){
-            return $this->categoriaId=$categoriaId;
+        public function setFacturaId($facturaId){
+            return $this->facturaId=$facturaId;
         }
 
-        public function getCategoriaId(){
-            return $this->categoriaId;
+        public function getFacturaId(){
+            return $this->facturaId;
         }
 
-        public function setNombre($nombre){
-            return $this->nombre=$nombre;
+        public function setEmpleadoId($empleadoId){
+            return $this->empleadoId=$empleadoId;
         }
 
-        public function getNombre(){
-            return $this->nombre;
+        public function getEmpleadoId(){
+            return $this->empleadoId;
         }
 
-        public function setDescripcion($descripcion){
-            return $this->descripcion=$descripcion;
+        public function setClienteId($cliente){
+            return $this->cliente=$cliente;
         }
 
-        public function getDescripcion(){
-            return $this->descripcion;
+        public function getClienteId(){
+            return $this->cliente;
         }
 
-        public function setImagen($imagen){
-            return $this->imagen=$imagen;
+        public function setFecha($fecha){
+            return $this->fecha=$fecha;
         }
 
-        public function getImagen(){
-            return $this->imagen;
+        public function getFecha(){
+            return $this->fecha;
         }
 
 
         public function insertData(){
             try {
-                $stm= $this->dbCnx->prepare("INSERT INTO categorias(categoriaId,nombre,descripcion,imagen) VALUES(?,?,?,?)");
-                $stm->execute([$this->categoriaId,$this->nombre,$this->descripcion,$this->imagen]);
+                $stm= $this->dbCnx->prepare("INSERT INTO facturas(facturaId,empleadoId,clienteId,fecha,) VALUES(?,?,?,?)");
+                $stm->execute([$this->facturaId,$this->empleadoId,$this->clienteId,$this->fecha]);
             } catch (Exception $e) {
                 return $e->getMessage();
             }
@@ -72,7 +71,7 @@
 
         public function selectAll(){
             try {
-                $stm= $this->dbCnx->prepare("SELECT * FROM categorias");
+                $stm= $this->dbCnx->prepare("SELECT * FROM facturas");
                 $stm->execute();
                 return $stm->fetchAll();
             } catch (Exception $e) {
@@ -82,8 +81,8 @@
 
         public function delete(){
             try {
-                $stm=$this->dbCnx->prepare("DELETE FROM categorias WHERE categoriaId=?");
-                $stm->execute([$this->categoriaId]);
+                $stm=$this->dbCnx->prepare("DELETE FROM facturas WHERE facturaId=?");
+                $stm->execute([$this->facturaId]);
                 return $stm->fetchAll();
             } catch (Exception $e) {
                 return $e->getMessage();
@@ -93,8 +92,8 @@
 
         public function selectOne(){
             try {
-                $stm=$this->dbCnx->prepare("SELECT * FROM categorias WHERE categoriaId=?");
-                $stm->execute([$this->categoriaId]);
+                $stm=$this->dbCnx->prepare("SELECT * FROM facturas WHERE facturaId=?");
+                $stm->execute([$this->facturaId]);
                 return $stm->fetchAll();
             } catch (Exception $e) {
                 return $e->getMessage();
@@ -103,8 +102,8 @@
 
         public function update(){
             try {
-                $stm=$this->dbCnx->prepare("UPDATE categorias SET nombre=?,descripcion=?,imagen=? WHERE categoriaId = ?");
-                $stm->execute([$this->nombre,$this->descripcion,$this->imagen,$this->categoriaId]); 
+                $stm=$this->dbCnx->prepare("UPDATE facturas SET empleadoId=?,clienteId=?,fecha=? WHERE facturaId = ?");
+                $stm->execute([$this->empleadoId,$this->clienteId,$this->fecha,$this->facturaId]); 
             } catch (Exception $e) {
                 return $e->getMessage();
             }
